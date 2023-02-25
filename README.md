@@ -42,7 +42,7 @@ Before deploying the server, make sure you have the folders dags, db, logs, and 
 docker services.
 ```shell
 # choose your airflow version
-export AIRFLOW_VERSION=2.4.1
+export AIRFLOW_VERSION=2.5.1
 invoke compose.up-airflow --build
 ```
 Finally, in the browser, open `http://localhost:8080` and put the username and password you used in
