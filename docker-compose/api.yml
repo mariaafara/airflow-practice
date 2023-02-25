@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+    api:
+        image: api
+        build:
+            context: ../fake_api
+            dockerfile: Dockerfile
+        volumes:
+            -   ../fake_api/app:/app
+        ports:
+            -   8001:8000
+        command: ["uvicorn", "main:app", "--workers=2", "--host=0.0.0.0", "--reload"]

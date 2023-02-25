@@ -35,9 +35,13 @@ services:
                 condition: service_completed_successfully
         env_file:
             - airflow/airflow.env
+        environment:
+            PYTHONPATH: /my_package
         volumes:
             - ../dags:/opt/airflow/dags
             - ../logs:/opt/airflow/logs
+            - ../data:/data
+            - ../my_package:/my_package/
     airflow-webserver:
         image: my-custom-airflow:${AIRFLOW_VERSION:-2.4.1}
         build:
