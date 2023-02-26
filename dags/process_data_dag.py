@@ -39,17 +39,23 @@ def my_dag():
 
         return count(preprocess.expand(data=data))
 
+    # @task
+    # def store_data(data):
+    #     from pathlib import Path
+    #
+    #     from loader_storer import store_csv
+    #
+    #     data_path = "../data/outputs/preprocessed_text_commands.csv"
+    #     store_csv(Path(data_path), data)
 
     @task
-    def store_data(data):
-        from pathlib import Path
+    def store_data(data, key, bucket_name):
+        from loader_storer import store_csv_s3
 
-        from loader_storer import store_csv
+        store_csv_s3(key, bucket_name, data)
 
-        data_path = "../data/outputs/preprocessed_text_commands.csv"
-        store_csv(Path(data_path), data)
-
-    store_data(my_task_group(get_data()))
+    store_data(my_task_group(get_data()), key="tasks/{{ti.task_id}}/{{ds}}/{{ti.try_number}}.csv",
+               bucket_name="airflow_bucket")
 
 
 my_dag()
