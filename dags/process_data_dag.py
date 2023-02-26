@@ -7,7 +7,7 @@ from airflow.decorators import dag, task, task_group
     start_date=pendulum.yesterday(),
     schedule=None,
     catchup=False,
-    dag_id="intent_class_dag"
+    dag_id="process_data_dag."
 )
 def my_dag():
     @task
@@ -15,7 +15,7 @@ def my_dag():
         # import pandas as pd
         from pathlib import Path
 
-        from loader import load_csv
+        from loader_storer import load_csv
         data_path = "../data/inputs/text_commands.csv"
         return load_csv(Path(data_path))[:10]  # pd.DataFrame(data=load_csv(Path(data_path)))
 
@@ -25,7 +25,7 @@ def my_dag():
         def preprocess(data, **context):
             from preprocess import Preprocessor
 
-            preprocessor = Preprocessor(stop_words=True, stemming=False, lowercasing=False, special_chars_removal=False,
+            preprocessor = Preprocessor(stop_words=True, stemming=True, lowercasing=True, special_chars_removal=False,
                                         numbers_removal=False, spell_check=False)
             print(data)
 
@@ -39,7 +39,17 @@ def my_dag():
 
         return count(preprocess.expand(data=data))
 
-    my_task_group(get_data())
+
+    @task
+    def store_data(data):
+        from pathlib import Path
+
+        from loader_storer import store_csv
+
+        data_path = "../data/outputs/preprocessed_text_commands.csv"
+        store_csv(Path(data_path), data)
+
+    store_data(my_task_group(get_data()))
 
 
 my_dag()
