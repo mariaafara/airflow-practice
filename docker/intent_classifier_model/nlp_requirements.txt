@@ -1,0 +1,6 @@
+# -c 'https://raw.githubusercontent.com/apache/airflow/constraints-2.5.1/constraints-3.7.txt'
+nltk
+pandas
+numpy
+tensorflow
+keras
