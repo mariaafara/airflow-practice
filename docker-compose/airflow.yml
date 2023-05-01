@@ -36,8 +36,8 @@ services:
         env_file:
             - airflow/airflow.env
         volumes:
-            - ../dags:/opt/airflow/dags
-            - ../logs:/opt/airflow/logs
+            - "${PROJECT_DIR:-..}/dags:/opt/airflow/dags"
+            - "../logs:/opt/airflow/logs"
     airflow-webserver:
         image: my-custom-airflow:${AIRFLOW_VERSION:-2.4.1}
         build:
@@ -61,7 +61,7 @@ services:
         env_file:
             - airflow/airflow.env
         volumes:
-            - ../dags:/opt/airflow/dags
+            - ${PROJECT_DIR:-..}/dags:/opt/airflow/dags
             - ../logs:/opt/airflow/logs
         ports:
             - "8080:8080"
