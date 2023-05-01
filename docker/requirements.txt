@@ -1,3 +1,4 @@
 -c 'https://raw.githubusercontent.com/apache/airflow/constraints-2.5.3/constraints-3.7.txt'
 apache-airflow[amazon]
 apache-airflow-providers-smtp==1.0.1
+apache-airflow-providers-docker
