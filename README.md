@@ -4,6 +4,7 @@ This project contains a [docker-compose](https://docs.docker.com/compose/) file,
 deploy an airflow server with local executor for testing/development.
 
 ## Requirements
+
 - [python](https://www.python.org/downloads/) 3.8+
 - [docker](https://docs.docker.com/engine/install/) and [docker compose](https://docs.docker.com/compose/install/)
 - install the python requirements:
@@ -12,7 +13,9 @@ deploy an airflow server with local executor for testing/development.
     ```
 
 ### Development
+
 To contribute to this project, you need to activate the pre-commit in order to apply the linters on each new commit:
+
 ```shell
 pre-commit install
 ```
@@ -26,8 +29,10 @@ as you need.
 ## Airflow webserver credentials
 
 In this project version, we configure the airflow webserver credentials in the
-[airflow docker compose file](docker-compose/airflow.yml) which we provide as environment variables for the  which you can
+[airflow docker compose file](docker-compose/airflow.yml) which we provide as environment variables for the which you
+can
 update it to add your user infos.
+
 ```dotenv
 _AIRFLOW_WWW_USER_USERNAME: airflow_user
 _AIRFLOW_WWW_USER_FIRSTNAME: Airflow
@@ -38,18 +43,35 @@ _AIRFLOW_WWW_USER_PASSWORD: airflow_password
 ```
 
 ## Deploy the airflow server
+
 Before deploying the server, make sure you have the folders dags, db, logs, and scripts which are attached to some
 docker services.
+
+To map the `dags` directory to a location other than the root of the airflow_server, you need to define the PROJECT_DIR
+environment variable with the desired path.
+
+E.g:
+
+If you are using the airflow_server as a submodule, and you want to map the dags directory to the root folder of your
+project, you can define the PROJECT_DIR environment variable as follows:
+
+```shell
+export PROJECT_DIR=../..
+```
+
 ```shell
 # choose your airflow version
-export AIRFLOW_VERSION=2.4.1
+export AIRFLOW_VERSION=2.5.3
 invoke compose.up-airflow --build
 ```
+
 Finally, in the browser, open `http://localhost:8080` and put the username and password you used in
 [this step](#airflow-webserver-credentials) and click on login.
 
 ## Stop the airflow server
+
 To stop the server, you have multiple option:
+
 - Stop the containers without deleting them:
     ```shell
     invoke compose.stop
