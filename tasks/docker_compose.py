@@ -11,6 +11,7 @@ def up_airflow(ctx, version=1, build=False, extra_services=None):
         "airflow-webserver",
         "airflow-init",
         "minio",
+        "docker-socket-proxy"
     ]
     if extra_services is not None:
         services += extra_services
