@@ -61,7 +61,7 @@ export PROJECT_DIR=../..
 
 ```shell
 # choose your airflow version
-export AIRFLOW_VERSION=2.5.3
+export AIRFLOW_VERSION=2.7.1
 invoke compose.up-airflow --build
 ```
 
