@@ -13,6 +13,7 @@ services:
             interval: 5s
             retries: 5
         restart: always
+
     airflow-scheduler:
         image: my-custom-airflow:${AIRFLOW_VERSION:-2.4.1}
         build:
@@ -38,6 +39,7 @@ services:
         volumes:
             - "${PROJECT_DIR:-..}/dags:/opt/airflow/dags"
             - "../logs:/opt/airflow/logs"
+            - "${PROJECT_DIR:-..}/data:/data"
     airflow-webserver:
         image: my-custom-airflow:${AIRFLOW_VERSION:-2.4.1}
         build:
@@ -69,7 +71,7 @@ services:
         image: my-custom-airflow:${AIRFLOW_VERSION:-2.4.1}
         build:
             context: ../docker
-            dockerfile: Dockerfile
+            dockerfile: Dockerfilenetw
             args:
                 AIRFLOW_VERSION: ${AIRFLOW_VERSION:-2.4.1}
         entrypoint: /opt/airflow/scripts/entrypoint.sh
