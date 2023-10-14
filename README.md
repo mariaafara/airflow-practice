@@ -56,12 +56,9 @@ If you are using the airflow_server as a submodule, and you want to map the dags
 project, you can define the PROJECT_DIR environment variable as follows:
 
 ```shell
-export PROJECT_DIR=../..
-```
-
-```shell
 # choose your airflow version
 export AIRFLOW_VERSION=2.7.1
+export PROJECT_DIR=../..
 invoke compose.up-airflow --build
 ```
 
