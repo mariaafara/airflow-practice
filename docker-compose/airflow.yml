@@ -17,7 +17,7 @@ services:
     airflow-scheduler:
         image: my-custom-airflow:${AIRFLOW_VERSION:-2.4.1}
         build:
-            context: ../docker
+            context: ../docker/airflow
             dockerfile: Dockerfile
             args:
                 AIRFLOW_VERSION: ${AIRFLOW_VERSION:-2.4.1}
@@ -43,7 +43,7 @@ services:
     airflow-webserver:
         image: my-custom-airflow:${AIRFLOW_VERSION:-2.4.1}
         build:
-            context: ../docker
+            context: ../docker/airflow
             dockerfile: Dockerfile
             args:
                 AIRFLOW_VERSION: ${AIRFLOW_VERSION:-2.4.1}
@@ -70,8 +70,8 @@ services:
     airflow-init:
         image: my-custom-airflow:${AIRFLOW_VERSION:-2.4.1}
         build:
-            context: ../docker
-            dockerfile: Dockerfilenetw
+            context: ../docker/airflow
+            dockerfile: Dockerfile
             args:
                 AIRFLOW_VERSION: ${AIRFLOW_VERSION:-2.4.1}
         entrypoint: /opt/airflow/scripts/entrypoint.sh

@@ -14,6 +14,7 @@ def up_airflow(ctx, version=1, build=False, extra_services=None):
         "docker-socket-proxy",
         "postgres",
         "pgadmin",
+        "mlflow-server",
     ]
     if extra_services is not None:
         services += extra_services

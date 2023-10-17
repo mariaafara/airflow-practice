@@ -1,0 +1,4 @@
+mlflow==2.7.1
+postgres
+boto3
+SQLAlchemy==1.4.46
