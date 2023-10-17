@@ -23,7 +23,7 @@ pre-commit install
 ## Customize your airflow docker image
 
 To install your python packages and use them in the dags, you can add them to the
-[requirements.txt](docker/requirements.txt) file, and you can update the [Dockerfile](docker/Dockerfile)
+[requirements.txt](docker/airflow/requirements.txt) file, and you can update the [Dockerfile](docker/airflow/Dockerfile)
 as you need.
 
 ## Airflow webserver credentials
